@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:50:30 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/25 03:44:22 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/26 00:39:30 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzeroo(void *s, int start)
 {
 	size_t	i;
 
-	i = 0;
+	i = start;
 	while (s[i] != '\n')
 		((char *)s)[i++] = 0;
 }
