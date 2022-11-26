@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:36:55 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/26 02:40:21 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/26 04:40:42 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,55 +26,49 @@ int	check_if_return(char *str)
 	return (0);
 }
 
-char	*return_in_line(char *buffer, char *str)
+char	*return_in_line(char *buffer, char *str, char *string)
 {
 	int		j;
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	j = ft_strlenn(buffer);
+	j = ft_strlenn(string + 1);
 	tmp = 0;
-	while (buffer[j])
-		tmp[i++] = buffer[j++];
-	ft_strjoin(str, tmp);
-	ft_bzeroo(buffer, 0);
-	j = 0;
-	i = ft_strlenn(buffer);
-	while (buffer[i])
-		buffer[j++] = buffer[i++];
-	ft_bzeroo(buffer, j);
-	return (str);
+	while (string[j])
+		tmp[i++] = string[j++];
+	free(string);
+	i = -1;
+	while (tmp[++i])
+		str[i] = tmp[i];
+	return (ft_strjoin());
 }
 
 // return the actual line
-char	*get_line(int fd, char *buffer, char *str)
-{
-	int	a;
-
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	a = read(fd, buffer, BUFFER_SIZE);
-	if (!a)
-		return (0);
-	if (a == -1)
-		return (-1);
-	while (check_if_return(buffer) == 0)
-	{
-		str = ft_strjoin(str, buffer);
-		free(buffer);
-	}
-	if (check_if_return(buffer) == 1)
-		return (return_in_line(buffer, str));
-	return (str);
-}
-
-//go to the next line
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*str;
+	int				a;
+	char			*buffer;
+	char			*string;
+	static char		*str;
 
-	return (get_line(fd, buffer, str));
+	str = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!str)
+		return (NULL);
+	while (fd)
+	{
+		a = read(fd, string, BUFFER_SIZE);
+		if (!a)
+			return (0);
+		if (a == -1)
+			return (NULL);
+		while (check_if_return(str) == 0)
+		{
+			buffer = ft_strjoin(str, buffer);
+			free(str);
+		}
+		if (check_if_return(str) == 1)
+			return (return_in_line(buffer, str, string));
+	}
+	return (buffer);
 }
