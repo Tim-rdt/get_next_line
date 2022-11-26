@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:06:18 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/26 04:12:08 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/26 05:06:25 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ char	*get_next_line(int fd);
 size_t		ft_strlenn(const char *str);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strjoin(char const *s1, char const *s2);
-void	ft_bzero(void *s, size_t n);
+size_t		ft_strlen(const char *str);
 
 #endif
