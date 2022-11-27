@@ -6,11 +6,20 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:50:30 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/26 05:05:21 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/27 11:17:19 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < n)
+		((char *)s)[i] = 0;
+}
 
 size_t	ft_strlenn(const char *str)
 {
@@ -28,9 +37,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 
 	if (dstsize == 0)
 		return (ft_strlen(src));
-	i = -1;
-	while (src[++i] && i < (dstsize - 1))
+	i = 0;
+	while (src[i] && i < (dstsize - 1))
+	{
 		dst[i] = src[i];
+		i++;
+	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
 }

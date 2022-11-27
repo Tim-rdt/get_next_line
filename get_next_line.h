@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:06:18 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/26 05:06:25 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:45:03 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 // ulimit -Hn     Hard limit
 // ulimit -Sn     Soft limit
 # ifndef MAX_FILE_DESCRIPTOR
-#  define MAX_FILE_DESCRIPTOR 10240
+#  define MAX_FILE_DESCRIPTOR 4864
 # endif
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 # include "../libft/libft.h"
 
 char	*get_next_line(int fd);
