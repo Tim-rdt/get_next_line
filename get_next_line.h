@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:06:18 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/27 09:45:03 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/27 17:57:59 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #  define MAX_FILE_DESCRIPTOR 4864
 # endif
 
-# include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/types.h>
