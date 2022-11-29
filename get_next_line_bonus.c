@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:36:55 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/29 08:37:12 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:54:38 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*next_line(char *str)
 	return (new);
 }
 
-char	*cut_line(char *str)
+char	*get_get_cut_line(char *str)
 {
 	int			i;
 	char		*tmp;
@@ -97,15 +97,15 @@ char	*get_the_line(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[MAX_FILE_DESCRIPTOR];
 	char		*line;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	str = get_the_line(fd, str);
-	if (!str)
+	str[fd] = get_the_line(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = cut_line(str);
-	str = next_line(str);
+	line = get_get_cut_line(str[fd]);
+	str[fd] = next_line(str[fd]);
 	return (line);
 }
