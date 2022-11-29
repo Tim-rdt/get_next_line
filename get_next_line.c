@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:36:55 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/29 04:22:37 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/29 06:40:28 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,64 +16,85 @@
 int	check_if_return(char *str)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	if (!str)
-		return (0);
-	while (str[++i])
+	j = ft_strlen(str, 1);
+	while (++i < j)
 		if (str[i] == '\n')
 			return (1);
 	return (0);
 }
 
-char	*return_in_line(char *buffer, char **str, char *line)
+char	*next_line(char *str)
 {
-	int			j;
+	char	*new;
+	int		i;
+	int		j;
+
+	j = ft_strlen(str, 2);
+	new = malloc(ft_strlen(str, 1) - j + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[j])
+		new[i++] = str[j++];
+	new[i] = 0;
+	free(str);
+	return (new);
+}
+
+char	*return_in_line(char *str)
+{
 	int			i;
 	char		*tmp;
 
 	i = 0;
-	j = ft_strlenn(buffer) + 1;
-	*str = malloc(sizeof(char) * (ft_strlen(buffer) - ft_strlenn(buffer) - 1));
-	while (buffer[j])
-		str[0][i++] = buffer[j++];
-	tmp = malloc(sizeof(char) * (j - i + 1));
+	tmp = malloc(sizeof(char) * ft_strlen(str, 2) + 1);
+	if (!tmp)
+		return (0);
 	i = -1;
-	while (buffer[++i] != '\n')
-		tmp[i] = buffer[i];
+	while (str[++i] != '\n' && str[i])
+		tmp[i] = str[i];
 	tmp[i++] = '\n';
 	tmp[i] = '\0';
-	if (!line)
-		return (tmp);
-	return (ft_strjoin(line, tmp));
+	return (tmp);
+}
+
+char	*get_the_line(int fd, char *str)
+{
+	int				a;
+	char			*buffer;
+
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	a = 1;
+	while (a && !check_if_return(str))
+	{
+		a = read(fd, buffer, BUFFER_SIZE);
+		if (a == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[a] = 0;
+		str = ft_strjoin(str, buffer);
+	}
+	free(buffer);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	int				a;
-	char			buffer[BUFFER_SIZE + 1];
-	char			*line;
-	char			*tmp;
-	static char		*str = 0;
+	static char	*str;
+	char		*line;
 
-	line = 0;
-	while (fd)
-	{
-		a = read(fd, buffer, BUFFER_SIZE);
-		if (a == 0)
-			return (NULL);
-		if (a == -1)
-			return (NULL);
-		if (check_if_return(buffer) == 0)
-		{
-			tmp = ft_strjoin(line, buffer);
-			line = ft_strjoin(str, tmp);
-			free(tmp);
-			free(str);
-		}
-		if (check_if_return(buffer) == 1)
-			return (return_in_line(buffer, &str, line));
-	}
+	str = get_the_line(fd, str);
+	if (!str)
+		return (NULL);
+	line = return_in_line(str);
+	str = next_line(str);
 	return (line);
 }
 
