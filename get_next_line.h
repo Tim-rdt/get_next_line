@@ -6,7 +6,7 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:06:18 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/27 17:57:59 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/29 01:14:09 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10
 # endif
 
 // ulimit -Hn     Hard limit
