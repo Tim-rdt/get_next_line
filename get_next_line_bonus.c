@@ -6,11 +6,11 @@
 /*   By: troudot <troudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:36:55 by troudot           #+#    #+#             */
-/*   Updated: 2022/11/29 21:54:38 by troudot          ###   ########.fr       */
+/*   Updated: 2022/11/29 22:45:37 by troudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //return (1) if he are \n in the line else return (0)
 int	check_if_return(char *str)
